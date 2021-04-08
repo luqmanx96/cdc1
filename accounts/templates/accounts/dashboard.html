@@ -17,11 +17,13 @@
           <th>Customer</th>
           <th>Phone</th>
         </tr>
+
         {% for x in customers %}
         <tr>
           <td>{{x.name}}</td>
           <td>{{x.phone}}</td>
         </tr>
+
         {% endfor %}
       </table>
     </div>
@@ -35,11 +37,23 @@
       <table class="table table-sm">
         <tr>
           <th>Product</th>
-          <th>Date Orderd</th>
+          <th>Date Ordered</th>
           <th>Status</th>
           <th>Update</th>
           <th>Remove</th>
         </tr>
+
+        {% for y in orders %}
+        <tr>
+          <td>{{y.product}}</td>
+          <td>{{y.date_created}}</td>
+          <td>{{y.status}}</td>
+          <td><a href=''>Update</td>
+          <td><a href=''>Delete</td>
+
+        </tr>
+
+        {% endfor %}
       </table>
     </div>
   </div>
