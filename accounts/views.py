@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # Create your views here.
 from .models import *
+from .forms import OrderForm
 
 
 def home(request):
@@ -14,8 +15,10 @@ def home(request):
     delivered = orders.filter(status='Delivered').count()
     pending = orders.filter(status='Pending').count()
 
-    context = {'customers': customers, 'orders': orders,
-               'total_orders': total_orders, 'delivered': delivered, 'pending': pending}
+    context = {'orders': orders, 'customers': customers,
+               'total_orders': total_orders, 'delivered': delivered,
+               'pending': pending}
+
     return render(request, 'accounts/dashboard.html', context)
 
 
@@ -36,6 +39,13 @@ def customer(request, pk_test):
 
 
 def createOrder(request):
+    form = OrderForm()
+    if request.method == 'POST':
+        #print('Printing POST:', request.POST)
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
 
-    context = {}
+    context = {'form': form}
     return render(request, 'accounts/order_form.html', context)
