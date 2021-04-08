@@ -22,7 +22,11 @@
         {% for x in customers %}
         <tr>
           <td>
-            <a class="btn btn-sm btn-info" href="x`">View </a>
+            <a
+              class="btn btn-sm btn-info"
+              href="{% url 'customer' customer.id %}"
+              >View
+            </a>
           </td>
           <td>{{x.name}}</td>
           <td>{{x.phone}}</td>
